@@ -23,7 +23,9 @@ jobs:
           sudo swapoff -a
           sudo rm -f /swapfile
           sudo apt clean
-          docker rmi $(docker images -q)
+          if [ "$(docker images -q)" != "" ]; then
+            docker rmi $(docker images -q)
+          fi
           df -h
 
       - name: Build WebGL
