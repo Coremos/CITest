@@ -1,8 +1,6 @@
 name: Build WebGL and Deploy 
-
 on:
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +17,6 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
-      - name: Remove old artifacts
-        uses: c-hive/gha-remove-artifacts@v1
-        with:
-          age: '2 weeks'
 
       - name: Free Disk Space
         run: |
@@ -44,11 +37,6 @@ jobs:
         with:
           targetPlatform: WebGL
           allowDirtyBuild: true
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/WebGL/WebGL
 
   deploy:
     runs-on: ubuntu-latest
